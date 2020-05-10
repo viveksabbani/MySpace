@@ -1,0 +1,10 @@
+<%- include('partials/header'); -%>
+<h1>You are on the people page of myspace</h1>
+<% people.forEach(function(p){ %>
+    <li><%= p %></li>
+<% }) %>
+<form action="/people" method="POST">
+    <input type="text" name="person" placeholder="name">
+    <button>submit</button>
+</form>
+<%- include ('partials/footer'); -%>
