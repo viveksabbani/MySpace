@@ -82,14 +82,14 @@
     position: relative;
 }
 
-input{
-    width: 50%;
+/* input{
+    width: 75%;
     display: block;
     margin: 15px auto;
 }
 input#name{
     margin-top: 35px;
-}
+} */
 
 
 #close{
@@ -101,4 +101,21 @@ input#name{
     font-size: 42px;
     transform: rotate(45deg);
     cursor: pointer;
+}
+.input-group{
+    width: 75%;
+    margin: 15px auto 0 auto;
+}
+#search_results{
+    background-color: whitesmoke;
+    border: grey;
+    color: rgb(47, 50, 228);
+    width: 75%;
+    margin: 0 auto;
+}
+.result{
+    margin: 0 auto;
+    padding: 5px 0px;
+    box-sizing: border-box;
+    
 }

@@ -2,6 +2,7 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
     Employee = require("./Associations/models/employee.js"),
+    Seat = require("./Associations/models/seat"),
     controller = require("./controller.js");
 
 var app = express();
@@ -29,6 +30,13 @@ mongoose.connect("mongodb://localhost/employeeDB");
 //         console.log(employee);
 //     }
 // })
+
+
+// Seat.create({
+//     seat : "S1",
+//     division: "Hospitality",
+//     team: "DevOps"
+// })
 //Routes
 app.get("/",function(req,res){
     //res.send("You are on the main page!!!");
@@ -55,6 +63,7 @@ app.get("/:user",function(req,res){
 })
 
 
+
 //POST Routes
 app.post("/people",function(req,res){
     var person = req.body.person;
@@ -70,6 +79,10 @@ app.get("/ajax/get/:userInput",function(req,res){
     controller.findEmployee(req,res);
     console.log("ajax get route is hit!!!");
 });
+
+app.get("/ajax/seat/:seatNum",function(req,res){
+    controller.findSeat(req,res);
+})
 
 //Starting a node server
 app.listen(3000,function(){

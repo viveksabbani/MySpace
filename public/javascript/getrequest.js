@@ -1,6 +1,6 @@
-$(document).ready(function(){
+// $(document).ready(function(){
     var count =0;
-    $('#empsearch').keyup(function () {
+    $('.bg-modal').on("keyup","#empsearch",function () {
         if(this.value.length === 0)
         $('#names').empty();
         if(this.value.length > 3)
@@ -33,15 +33,4 @@ $(document).ready(function(){
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-})
+// })

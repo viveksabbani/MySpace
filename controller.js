@@ -1,4 +1,5 @@
 const Employee = require("./Associations/models/employee");
+const Seat = require("./Associations/models/seat");
 
     exports.findEmployee =(req, res) =>{
         Employee.find({
@@ -21,6 +22,16 @@ const Employee = require("./Associations/models/employee");
     
         }).lean()
 } 
+
+exports.findSeat =(req,res) =>{
+    Seat.find({seat: req.params.seatNum},function(err,seat){
+        if(err){
+            console.log("Error unable to fetch the info form the database!!!");
+        }else{
+            res.send(seat);
+        }
+    })
+}
 
 
     // exports.findAll = (req, res) =>  {
