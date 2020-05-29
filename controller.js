@@ -8,11 +8,6 @@ const Seat = require("./Associations/models/seat");
                 $options: 'i'
             }
         }, function (err, employees) {
-            // employees.forEach(function (item) {
-            //     //console.log(item.name+" "+"isPresent: "+item.isPresent);
-            //     console.log(item.name);
-            // })
-            //updateDropdown(employees);
             if(err){
                 // console.log("Error in fetching data from db");
                 // console.log(userInput);
@@ -26,9 +21,41 @@ const Seat = require("./Associations/models/seat");
 exports.findSeat =(req,res) =>{
     Seat.find({seat: req.params.seatNum},function(err,seat){
         if(err){
-            console.log("Error unable to fetch the info form the database!!!");
+            res.send("err");
         }else{
             res.send(seat);
+        }
+    })
+}
+
+exports.bookSeat =(req,res) =>{
+    Seat.updateOne({seat: req.body.seat},{$set:{employee_name: req.body.name}},function(err){
+        if(err){
+           res.send("err");
+        }else{
+            Employee.updateOne({name:req.body.name},{$set:{inOffice: true}},function(err){
+                if(err){
+                    res.send("err");
+                }
+            })
+            res.send("booked");
+        }
+        // res.send(seat);
+    })
+}
+exports.cancelSeat =(req,res)=>{
+    Seat.updateOne({seat: req.body.seat},{$set:{employee_name: undefined}},function(err){
+        if(err){
+            res.send("err");
+        }else{
+            Employee.updateOne({name:req.body.name},{$set:{inOffice: false}},function(err){
+                if(err){
+                    res.send("err");
+                }else{
+                    res.send("canceled");
+                }
+            })
+            
         }
     })
 }

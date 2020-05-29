@@ -1,8 +1,9 @@
-// $(document).ready(function(){
+$(document).ready(function(){
     var count =0;
-    $('.bg-modal').on("keyup","#empsearch",function () {
+    $('.bg-modal').on("keyup","#userInput",function () {
+        // $('#submit').hide();
         if(this.value.length === 0)
-        $('#names').empty();
+        $('#search_results').empty();
         if(this.value.length > 3)
         ajaxGet(this.value);
     });
@@ -12,25 +13,35 @@
             type: "Get",
             url : "ajax/get/"+userInput,
             success: function(result){
-                $('#names').empty();
+                $('#search_results').empty();
                 var str =""
                 if(result.length === 0){
-                    str+='<a class="dropdown-item" href="#">Employee not found</a>';
-                }else{
+                    str+='<p class="result">Employee not found</p>';
+                    
+                }else if(result == "err"){
+                    str+='<p class="result">Database ERROR!</p>';
+                }
+                else{
                     $.each(result, function (i,employee) { 
+                        if(employee.inOffice){
+                            str+='<p class="booked">'+employee.name+'</p>'
+                        }else{
+                            str+='<p class="result">'+employee.name+'</p>'
+                        }
                         // $('#names .dropdown-item').append(employee.name + " ");
-                       str+='<a class="dropdown-item" href="#">'+employee.name+'</a>'
+                       
+                       
                      });
                 }
                 
-                 $('#names').html(str);
+                 $('#search_results').html(str);
                  console.log("live search success");
             },
             error : function(e){
-                $('#names').empty();
-                $("#names").html('<a class="dropdown-item" href="#"><strong>No employee found!!!</strong></a>');
+                $('#search_results').empty();
+                $("#search_results").html('<p class="result"><strong>No employee found!!!</strong></p>');
                 console.log("Error : ",e);
             }
         });
     }
-// })
+})

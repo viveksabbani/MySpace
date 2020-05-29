@@ -12,76 +12,57 @@ app.use(bodyParser.urlencoded({extended : true}));
 //DB connectivity
 mongoose.connect("mongodb://localhost/employeeDB");
 
-// var employeeSchema = new mongoose.Schema({
-//     name: String,
-//     team: String,
-//     inOffice: Boolean
-// })
-// var Employees =  mongoose.model("Employees",employeeSchema);
 // Employees.create({
 //     name: "Vinay Reddy",
 //     team:"ASI QA",
 //     inOffice:false
-// },function(err,employee){
-//     if(err){
-//         console.log("Database connectivity issue!!!");
-//     }else{
-//         console.log("Employee database updated!!!");
-//         console.log(employee);
-//     }
-// })
+// });
 
+// for(var i=0;i<4;i++){
+//     Seat.create({
+//         seat : `S${i+5}`,
+//         division: "Hospitality",
+//         team: "Venues"
+//     })
+// }
 
-// Seat.create({
-//     seat : "S1",
-//     division: "Hospitality",
-//     team: "DevOps"
-// })
 //Routes
+//GET
 app.get("/",function(req,res){
-    //res.send("You are on the main page!!!");
-    Employee.find({},function(err,employees){
+   Seat.find({},function(err,seats){
         if(err){
-            console.log("unable to retrive data from database!!!");
+            res.send(err);
         }else{
-            console.log("Database data fetch is succesful!");
-            res.render("myspace",{employees:employees});
-            console.log(employees);
+            res.render("myspace",{seats:seats});
         }
-    })
-    //res.render("myspace",{employees: employees});
-})
-var people =['Jaime', 'Jon' ,'Dany', 'Cersi', 'Arya'];
-app.get("/people",function(req,res){
-    res.render("home",{people:people});
+   })
 })
 
-app.get("/:user",function(req,res){
-    var userName = req.params.user;
-   res.send(userName+" is the user of this website!!!");
-   //res.render("home",{user: userName, people: people});
-})
-
-
-
-//POST Routes
-app.post("/people",function(req,res){
-    var person = req.body.person;
-    people.push(person);
-    res.redirect("/people");
-})
+//POST
 
 
 ////////////////////////////////////////////////////////////////////////////////
 //ajax routes
-//get route
+
+//GET
 app.get("/ajax/get/:userInput",function(req,res){
     controller.findEmployee(req,res);
-    console.log("ajax get route is hit!!!");
 });
 
 app.get("/ajax/seat/:seatNum",function(req,res){
     controller.findSeat(req,res);
+})
+app.get("/*",function(req,res){
+    res.redirect("/");
+})
+
+//POST
+app.post("/ajax/seat/reserve",function(req,res){
+    controller.bookSeat(req,res);
+})
+
+app.post("/ajax/seat/cancel",function(req,res){
+    controller.cancelSeat(req,res);
 })
 
 //Starting a node server
