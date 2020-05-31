@@ -1,14 +1,57 @@
 body {
+    font-family: 'Roboto', sans-serif;
     padding-top: 100px;
     background-color: rgb(122, 122, 122);
     outline: none;
     border: none;
 }
+nav .navbar-brand{
+    font-size: larger !important;
+    font-weight: 500 !important;
+}
+nav ul{
+    color: white;
+    font-size: large;
+    font-weight: 500;
+    cursor: pointer;
+}
+#randomize-input{
+    border-radius: 5px;
+    width: 80%;
+    margin: 0 auto;
+    border:1px solid rgba(128, 128, 128, 0.596);
+    outline: none;
+}
+#Reserve{
+    background-color: rgb(49, 209, 49);
+    width: 75%;
+    border-radius: 5px;
+    margin: auto;
+    justify-content: center;
+    color: white;
+}
+
+#randomize-bg-modal{
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, .7);
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+#randomize-content{
+    width: 300px;
+    height: 200px;
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding: 25px 15px 15px;
+    position: relative;
+}
 .container {
-    /* display: block; */
-    /* position: defaul; */
-    /* margin-left: 300px;
-    margin-right: auto; */
     text-align: center;
 }
 img{
@@ -21,17 +64,7 @@ img{
 #image-div{
             display: inline-block;
             position: relative;
-            
-            
-            /* margin-left: auto;
-            margin-right: auto; */
-            
         }
-
-
-/* button {
-    height: 30px;
-} */
 
 #S1 {
     top: 17.33%;
@@ -138,7 +171,7 @@ img{
     background-color: white;
     border-radius: 4px;
     text-align: center;
-    padding: 15px;
+    padding: 25px 15px 15px;
     position: relative;
 }
 
@@ -159,6 +192,7 @@ img{
 .input-group{
     width: 75%;
     margin: 0 auto;
+    padding-bottom: 10px;
 }
 #search_results{
     background-color: whitesmoke;
@@ -208,6 +242,11 @@ img{
     left: 20%;
     width: 60%;
     z-index: 1;
+    border-radius: 7px;
+}
+.btn-danger{
+    width: 75%;
+    border-radius: 7px;
 }
 .navbar{
     background-color: rgb(49, 209, 49);

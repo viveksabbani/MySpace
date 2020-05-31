@@ -28,6 +28,16 @@ exports.findSeat =(req,res) =>{
     })
 }
 
+exports.findTeamSeat =(req,res) =>{
+    Seat.find({team: req.params.teamName, employee_name: null},function(err,seat){
+        if(err){
+            res.send("err");
+        }else{
+            res.send(seat);
+        }
+    })
+}
+
 exports.bookSeat =(req,res) =>{
     Seat.updateOne({seat: req.body.seat},{$set:{employee_name: req.body.name}},function(err){
         if(err){

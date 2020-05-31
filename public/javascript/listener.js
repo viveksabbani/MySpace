@@ -32,39 +32,19 @@ function close(){
     })
 }
 function click_result(){
-    $(".bg-modal").on("click",".result",function(){
+    var temp =""
+    $("body").on("click",".result",function(){
         $("#userInput").val($(this).text());
-        empname = $(this).text();
         $("#search_results").empty();
-        success();
+        empname = $(this).text();
+        success(empname,seat);
         // $('#submit').show();
-    })
+    })  
 }
 
 
 //Sending seat number and employee name to post route
-function success(){
-$(".bg-modal").on("click",".btn-success",function(){
-    form_data = {name:empname,seat:seat};
-    $.ajax({
-        type: "POST",
-        url: "/ajax/seat/reserve",
-        data: form_data,
-        success:function (result){
-            $(".modal-content").empty();
-            console.log(result);
-            if(result == "err"){
-                $(".modal-content").html('<a id="close">+</a><h3>Unable to reserve the seat! Please try later.</h3>');
-            }else{
-                $(".modal-content").html(`<a id="close">+</a><h3>${seat} has been reserved for ${empname}</h3>`);
-            }
-        },
-        error: function(e){
-            $(".modal-content").html(`<a id="close">+</a><h3>${e}</h3>`);
-        }
-    })
-})
-}
+
 $(".modal-content").on("click",".btn-danger",function(){
     $.ajax({
         type: "POST",
@@ -89,7 +69,6 @@ function seatDetails(seat){
         type: "Get",
         url : "ajax/seat/"+seat,
         success: function(result){
-            console.log(result);
             if(result == "err"){
                 $(".modal-content").html("<h3>Database fetch error! Please try again later!</h3>");
             }else if(result[0].employee_name == undefined){
@@ -120,5 +99,30 @@ function seatDetails(seat){
 }
 
 
-})
 
+
+})
+function consolePrint(){
+    console.log("It's working;!!!")
+}
+function success(empname,seat){
+    $("body").on("click",".btn-success",function(){
+        form_data = {name:empname,seat:seat};
+        $.ajax({
+            type: "POST",
+            url: "/ajax/seat/reserve",
+            data: form_data,
+            success:function (result){
+                $(".modal-content").empty();
+                if(result == "err"){
+                    $(".modal-content").html('<a id="close">+</a><h3>Unable to reserve the seat! Please try later.</h3>');
+                }else{
+                    $(".modal-content").html(`<a id="close">+</a><h3>${seat} has been reserved for ${empname}</h3>`);
+                }
+            },
+            error: function(e){
+                $(".modal-content").html(`<a id="close">+</a><h3>${e}</h3>`);
+            }
+        })
+    })
+    }

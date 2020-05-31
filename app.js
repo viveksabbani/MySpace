@@ -49,6 +49,9 @@ app.get("/ajax/get/:userInput",function(req,res){
     controller.findEmployee(req,res);
 });
 
+app.get("/ajax/seat/team/:teamName",function(req,res){
+    controller.findTeamSeat(req,res);
+})
 app.get("/ajax/seat/:seatNum",function(req,res){
     controller.findSeat(req,res);
 })
